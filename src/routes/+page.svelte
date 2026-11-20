@@ -4,16 +4,19 @@
 </script>
 
 <div class="container">
-    <Timer />
-    <div class="main_buttons">
-        <button
-            class:paused={!$isRunning}
-            onclick={() => isRunning.update((value) => !value)}
-        >
-            {$isRunning ? "Pause" : "Start"}
-        </button>
+    <div class="circle">
+        <Timer />
+        <div class="main_buttons">
+            <button
+                class:paused={!$isRunning}
+                onclick={() => isRunning.update((value) => !value)}
+            >
+                {$isRunning ? "Pause" : "Start"}
+            </button>
+        </div>
     </div>
-    <div class="secend_buttons">
+
+    <div class="second_buttons">
         <button onclick={() => btnRestart.set(true)}> Restart</button>
     </div>
 </div>
@@ -24,7 +27,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 500px;
+        height: 550px;
         gap: 10px;
     }
 
@@ -35,13 +38,14 @@
         border-radius: 5px;
         padding: 10px 20px;
         cursor: pointer;
+        margin-top: 30px;
 
         transition: all 0.4s ease;
     }
     .main_buttons button:hover {
-        padding: 12px 22px;
+        transform: scale(1.05);
     }
-    .secend_buttons button {
+    .second_buttons button {
         color: white;
         background-color: #102614;
         border: none;
@@ -49,7 +53,17 @@
         padding: 8px 12px;
         cursor: pointer;
     }
-    .secend_buttons button:hover {
-        padding: 9px 14px;
+    .second_buttons button:hover {
+        transform: scale(1.05);
+    }
+    .circle {
+        width: 300px;
+        height: 300px;
+        border: 5px solid coral;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>

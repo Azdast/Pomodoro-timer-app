@@ -1,9 +1,9 @@
 <script>
     import { isRunning, btnRestart } from "./stores/states.js";
 
-    let hours = $state(0);
     let minutes = $state(25);
     let seconds = $state(0);
+    let pandoraNums = $state(0);
 
     let isWorkingTime = $state(true);
 
@@ -16,18 +16,13 @@
             } else if (minutes > 0) {
                 minutes--;
                 seconds = 59;
-            } else if (hours > 0) {
-                hours--;
-                minutes = 59;
-                seconds = 59;
             } else {
                 if (isWorkingTime == true) {
-                    hours = 0;
                     minutes = 5;
                     seconds = 0;
+                    pandoraNums++;
                     isWorkingTime = false;
                 } else {
-                    hours = 0;
                     minutes = 25;
                     seconds = 0;
                     isWorkingTime = true;
@@ -42,24 +37,26 @@
     $effect(() => {
         if (!$btnRestart) return;
 
-        $isRunning = false;
-        hours = 0;
+        $isRunning = false
+        isWorkingTime = true;
         minutes = 25;
         seconds = 0;
+        pandoraNums = 0;
         $btnRestart = false;
     });
 </script>
 
 <div class="timer_display">
     <h1>
-        {String(hours).padStart(2, "0")}:
-        {String(minutes).padStart(2, "0")}:
-        {String(seconds).padStart(2, "0")}
+        {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
     </h1>
 
     <h4>
         {isWorkingTime ? "Working Time" : "Break Time"}
     </h4>
+    <h3>
+        {pandoraNums}
+    </h3>
 </div>
 
 <style>
@@ -77,6 +74,9 @@
     .timer_display h4 {
         margin: 0;
         color: white;
-        margin-bottom: 20px;
     }
+    .timer_display h3 {
+        margin: 0;
+        margin-bottom: 10px;
+        color: white;   }
 </style>
